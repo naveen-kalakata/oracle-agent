@@ -1,6 +1,33 @@
 # oracle-agent
 
-ReAct agent with A2A protocol [experimental]
+> **🔮 Live A2A endpoint:** https://oracle-agent-768432456747.us-central1.run.app
+>
+> - Agent card (machine-discoverable):
+>   `https://oracle-agent-768432456747.us-central1.run.app/a2a/app/.well-known/agent-card.json`
+> - JSON-RPC endpoint: `POST https://oracle-agent-768432456747.us-central1.run.app/a2a/app`
+> - API docs: `https://oracle-agent-768432456747.us-central1.run.app/docs`
+
+A production-deployed Google ADK agent exposing the **[Agent2Agent (A2A) protocol](https://a2a-protocol.org/)** — other agents (in any framework, any language) can call it programmatically using JSON-RPC over HTTP. The agent itself responds in dramatic, technically-correct prophecies (Oracle of Delphi meets stage magician), but the value is the protocol surface, not the persona.
+
+**Stack**
+- Google ADK with the `adk_a2a` template — A2A protocol v0.3.0, JSON-RPC transport, streaming enabled
+- Gemini 2.5 Flash via **Vertex AI** (service-account auth, no API keys in prod)
+- Built-in `google_search` tool for grounded prophecies on current events
+- FastAPI + Uvicorn, Cloud Run (scale-to-zero, 4 GiB)
+
+**Discover the agent's capabilities** programmatically:
+```bash
+curl https://oracle-agent-768432456747.us-central1.run.app/a2a/app/.well-known/agent-card.json | jq
+```
+
+Validate the A2A implementation with the [A2A Protocol Inspector](https://github.com/a2aproject/a2a-inspector).
+
+Sister repos in this portfolio:
+- [caveman-agent](https://github.com/naveen-kalakata/caveman-agent) — text compression agent (browser chat UI)
+- [docs-agent](https://github.com/naveen-kalakata/docs-agent) — RAG agent (Vertex AI Search)
+
+---
+
 Agent generated with `agents-cli` version `0.1.1`
 
 ## Project Structure
